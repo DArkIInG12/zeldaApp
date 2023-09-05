@@ -1,3 +1,4 @@
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -23,15 +24,22 @@ class DashboardScreen extends StatelessWidget {
               accountName: Text('Edgar Juarez Cordero'),
               accountEmail: Text('19030691@itcelaya.edu.mx')),
           ListTile(
-            leading: Image.network(
-                'https://cdn2.iconfinder.com/data/icons/legend-of-zelda-minish-cap-weapon-set/43/sword-256.png'),
+            leading: Image.asset('assets/images/four_sword.png'),
             trailing: const Icon(Icons.chevron_right),
             title: const Text('Four Sword'),
             subtitle: const Text('So Powerful'),
             onTap: () {
               Navigator.pushNamed(context, '/item');
             },
-          )
+          ),
+          /* DayNightSwitcherIcon(
+            isDarkModeEnabled: isDarkModeEnabled,
+            onStateChanged: (isDarkModeEnabled) {
+              setState(() {
+                this.isDarkModeEnabled = isDarkModeEnabled;
+              });
+            },
+          ), */
         ],
       ),
     );
