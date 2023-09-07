@@ -4,7 +4,7 @@ import 'package:project1/screens/item_screen.dart';
 
 Map<String, WidgetBuilder> getRoutes() {
   return {
-    '/dash': (BuildContext context) => const DashboardScreen(),
+    '/dash': (BuildContext context) => DashboardScreen(),
     '/item': (BuildContext context) => ItemScreen(),
   };
 }

@@ -1,15 +1,26 @@
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:project1/styles/global_values.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Bienvenidos :D')),
-      drawer: createDrawer(context),
-    );
+    //PROBAR CAMBIO EN EL TITULO DE LA PANTALLA
+    return ValueListenableBuilder(
+        valueListenable: GlobalValues.flagTitle,
+        builder: (context, value, _) {
+          return Scaffold(
+            appBar: AppBar(title: const Text('Bienvenidos :D')),
+            drawer: createDrawer(context),
+          );
+        });
   }
 
   Widget createDrawer(BuildContext context) {
@@ -32,14 +43,15 @@ class DashboardScreen extends StatelessWidget {
               Navigator.pushNamed(context, '/item');
             },
           ),
-          /* DayNightSwitcherIcon(
-            isDarkModeEnabled: isDarkModeEnabled,
+          const Spacer(
+            flex: 1,
+          ),
+          DayNightSwitcher(
+            isDarkModeEnabled: GlobalValues.flagTheme.value,
             onStateChanged: (isDarkModeEnabled) {
-              setState(() {
-                this.isDarkModeEnabled = isDarkModeEnabled;
-              });
+              GlobalValues.flagTheme.value = isDarkModeEnabled;
             },
-          ), */
+          ),
         ],
       ),
     );
