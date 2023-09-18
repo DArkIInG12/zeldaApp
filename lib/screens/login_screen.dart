@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project1/styles/global_values.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -56,15 +58,43 @@ class _LoginScreenState extends State<LoginScreen> {
             alignment: Alignment.bottomCenter,
             children: [
               Container(
-                height: 200,
+                height: 250,
                 margin: const EdgeInsets.symmetric(horizontal: 30),
                 padding: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.greenAccent),
                 //color: Colors.blueGrey,
-                child: Column(
-                    children: [txtUser, const SizedBox(height: 10), txtPass]),
+                child: Column(children: [
+                  txtUser,
+                  const SizedBox(height: 10),
+                  txtPass,
+                  const SizedBox(height: 10),
+                  ValueListenableBuilder(
+                      valueListenable: GlobalValues.flagCheckBox,
+                      builder: (context, value, _) {
+                        return Row(
+                          children: [
+                            const Text("Recuerdame:",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                )),
+                            Checkbox(
+                                value: GlobalValues.flagCheckBox.value,
+                                onChanged: (state) async {
+                                  GlobalValues.flagCheckBox.value = state!;
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  if (state) {
+                                    prefs.setBool('isLogged', true);
+                                  } else {
+                                    prefs.setBool('isLogged', false);
+                                  }
+                                })
+                          ],
+                        );
+                      })
+                ]),
               ),
               Container(
                   padding: const EdgeInsets.only(bottom: 200), child: imgLogo)
