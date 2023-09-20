@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project1/database/agendadb.dart';
 import 'package:project1/models/task_model.dart';
+import 'package:project1/widgets/TaskCardWidget.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
@@ -21,8 +22,13 @@ class _TaskScreenState extends State<TaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Task Manager'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.task))],
+        title: const Text('Task Manager'),
+        actions: [
+          IconButton(
+              onPressed: () => Navigator.pushNamed(context, '/addTask')
+                  .then((value) => setState(() {})),
+              icon: const Icon(Icons.task))
+        ],
       ),
       body: FutureBuilder(
           future: agendadb!.GETALLTASKS(),
@@ -30,9 +36,11 @@ class _TaskScreenState extends State<TaskScreen> {
               (BuildContext context, AsyncSnapshot<List<TaskModel>> snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
-                  itemCount: 5, //snapshot.data!.length,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Text('Hola');
+                    return TaskCardWidget(
+                      taskModel: snapshot.data![index],
+                    );
                   });
             } else {
               if (snapshot.hasError) {

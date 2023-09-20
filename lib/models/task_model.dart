@@ -2,7 +2,7 @@ class TaskModel {
   int? task_id;
   String? task_name;
   String? task_desc;
-  bool? task_state;
+  String? task_state;
 
   TaskModel({this.task_id, this.task_name, this.task_desc, this.task_state});
 
