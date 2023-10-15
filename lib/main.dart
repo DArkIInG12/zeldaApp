@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project1/provider/test_provider.dart';
 import 'package:project1/routes.dart';
 import 'package:project1/screens/dashboard_screen.dart';
 import 'package:project1/screens/login_screen.dart';
 import 'package:project1/styles/global_values.dart';
 import 'package:project1/styles/styles_app.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -52,13 +54,17 @@ class _MyAppState extends State<MyApp> {
     return ValueListenableBuilder(
         valueListenable: GlobalValues.flagTheme,
         builder: (context, value, _) {
-          return MaterialApp(
-            home: isLogged == true
-                ? const DashboardScreen()
-                : const LoginScreen(),
-            routes: getRoutes(),
-            theme:
-                value ? StylesApp.dkTheme(context) : StylesApp.lgTheme(context),
+          return ChangeNotifierProvider(
+            create: (context) => TestProvider(),
+            child: MaterialApp(
+              home: isLogged == true
+                  ? const DashboardScreen()
+                  : const LoginScreen(),
+              routes: getRoutes(),
+              theme: value
+                  ? StylesApp.dkTheme(context)
+                  : StylesApp.lgTheme(context),
+            ),
           );
         });
   }

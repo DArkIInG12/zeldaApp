@@ -48,9 +48,41 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ListTile(
             leading: const Icon(Icons.note_alt),
             trailing: const Icon(Icons.chevron_right),
-            title: const Text('Task Manager'),
+            title: const Text('Tasks Manager'),
             onTap: () {
               Navigator.pushNamed(context, '/tasks');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.person),
+            trailing: const Icon(Icons.chevron_right),
+            title: const Text('Teachers Manager'),
+            onTap: () {
+              Navigator.pushNamed(context, '/teachers');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.flag),
+            trailing: const Icon(Icons.chevron_right),
+            title: const Text('Careers Manager'),
+            onTap: () {
+              Navigator.pushNamed(context, '/careers');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.movie),
+            trailing: const Icon(Icons.chevron_right),
+            title: const Text('Movies'),
+            onTap: () {
+              Navigator.pushNamed(context, '/popular');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.search),
+            trailing: const Icon(Icons.chevron_right),
+            title: const Text('Test Provider'),
+            onTap: () {
+              Navigator.pushNamed(context, '/provider');
             },
           ),
           const Spacer(
