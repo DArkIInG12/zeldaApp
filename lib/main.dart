@@ -69,5 +69,3 @@ class _MyAppState extends State<MyApp> {
         });
   }
 }
-
-//CLASE 14

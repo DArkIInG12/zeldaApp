@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:project1/models/career_model.dart';
+import 'package:project1/models/popular_model.dart';
 import 'package:project1/models/task_model.dart';
 import 'package:project1/models/teacher_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -35,9 +36,14 @@ class Agenda {
     String teachers = '''create table teachers(teacher_id integer primary key,
     teacher_name varchar(100), teacher_email varchar(100), career_id integer, foreign key (career_id) references careers(career_id)) ''';
 
+    String movies = '''create table movies(id integer primary key,
+    backdrop_path text, original_language text, original_title text, overview text, popularity real, poster_path text, release_date text, title text, 
+    vote_average real, vote_count int, youTubeVideo text) ''';
+
     db.execute(careers);
     db.execute(teachers);
     db.execute(tasks);
+    db.execute(movies);
   }
 
   Future<int> INSERT(String tName, Map<String, dynamic> data) async {
@@ -88,6 +94,12 @@ class Agenda {
     return result.map((teacher) => TeacherModel.fromMap(teacher)).toList();
   }
 
+  Future<List<PopularModel>> GETALLMOVIES() async {
+    var connection = await database;
+    var result = await connection!.query('movies');
+    return result.map((movie) => PopularModel.fromMap(movie)).toList();
+  }
+
   Future<CareerModel> GETCAREER(int objectId) async {
     var connection = await database;
     var result = await connection!
@@ -103,6 +115,17 @@ class Agenda {
         .map((teacher) => TeacherModel.fromMap(teacher))
         .toList()
         .first;
+  }
+
+  Future<PopularModel?> GETMOVIE(int objectId) async {
+    var connection = await database;
+    var result = await connection!
+        .query('movies', where: 'id = ?', whereArgs: [objectId]);
+    if (result.isEmpty) {
+      return null;
+    } else {
+      return result.map((movie) => PopularModel.fromMap(movie)).toList().first;
+    }
   }
 
   Future<void> DELETEALL(table) async {

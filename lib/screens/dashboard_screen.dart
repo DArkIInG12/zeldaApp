@@ -72,9 +72,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ListTile(
             leading: const Icon(Icons.movie),
             trailing: const Icon(Icons.chevron_right),
-            title: const Text('Movies'),
+            title: const Text('Popular Movies'),
             onTap: () {
               Navigator.pushNamed(context, '/popular');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.movie_filter_rounded),
+            trailing: const Icon(Icons.chevron_right),
+            title: const Text('Favorite Movies'),
+            onTap: () {
+              Navigator.pushNamed(context, '/favorite');
             },
           ),
           ListTile(

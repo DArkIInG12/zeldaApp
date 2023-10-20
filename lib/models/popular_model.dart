@@ -12,6 +12,7 @@ class PopularModel {
   String? title;
   double? voteAverage;
   int? voteCount;
+  String? youTubeVideo;
 
   PopularModel({
     this.backdropPath,
@@ -25,6 +26,7 @@ class PopularModel {
     this.title,
     this.voteAverage,
     this.voteCount,
+    this.youTubeVideo,
   });
 
   factory PopularModel.fromMap(Map<String, dynamic> map) {
@@ -41,6 +43,7 @@ class PopularModel {
         voteAverage: (map["vote_average"] is int)
             ? (map["vote_average"] as int).toDouble()
             : map["vote_average"],
-        voteCount: map["vote_count"]);
+        voteCount: map["vote_count"],
+        youTubeVideo: map["youTubeVideo"] ?? '');
   }
 }
